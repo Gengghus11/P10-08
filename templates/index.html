@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Stock Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  </head>
+
+  <body class="p-4">
+    <div class="container">
+      <h1 class="mb-3">Select a Stock</h1>
+
+      <form method="post">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label">Ticker</label>
+            <select class="form-select" name="ticker" required>
+              {% for code, label in tickers.items() %}
+                <option value="{{code}}" {{ 'selected' if code == (selected_ticker or '') else '' }}>
+                  {{label}} ({{code}})
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Start</label>
+            <input type="date" class="form-control" name="start" value="{{default_start}}"/>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">End</label>
+            <input type="date" class="form-control" name="end" value="{{default_end}}"/>
+          </div>
+
+          <div class="col-md-1">
+            <label class="form-label">SMA 1</label>
+            <input type="number" class="form-control" name="sma_window" min="2" max="250" value="{{ default_sma_window or 5 }}">
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-check mb-1">
+              <input class="form-check-input" type="checkbox" id="enableSMA2" name="enable_sma2" {{'checked' if default_enable_sma2 else ''}}>
+              <label class="form-check-label" for="enableSMA2">Enable SMA 2</label>
+            </div>
+            <input type="number" class="form-control" id="sma2Input" name="sma_window2" min="2" max="250" value="{{default_sma_window2 or ''}}" placeholder="e.g. 20">
+          </div>
+
+          <div class="col-12">
+            <button class="btn btn-primary mt-2" type="submit">Show</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const enableBox = document.getElementById('enableSMA2');
+      const sma2Input = document.getElementById('sma2Input');
+      function toggleSMA2() { sma2Input.disabled = !enableBox.checked; }
+      enableBox.addEventListener('change', toggleSMA2);
+      toggleSMA2();
+    </script>
+    
+  </body>
+</html>
