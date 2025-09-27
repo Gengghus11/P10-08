@@ -8,6 +8,8 @@ Before anything, create a virtual environment and download the following librari
 3. pandas
 4. matplotlib (can be redundant)
 
+Download the stock and index HTML files from the templates folder and put them in the same folder as __init__.py.
+
 tldr: pip install flask yfinance panda matplotlib
 once installed, run the __init__.py file and view the working prototype at http://127.0.0.1:5000/
 
