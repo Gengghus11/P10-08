@@ -14,9 +14,10 @@ STOCKS = {
     "NVDA": "Nvidia",
 }
 
+import datetime
 # default value for inputs
-DEFAULT_START = "2023-01-01"
-DEFAULT_END = "2025-01-01"
+DEFAULT_START = "2022-01-01"
+DEFAULT_END = datetime.date.today()
 DEFAULT_SMA = 5 
 
 # fetch data from yfinance and ensure date is a column
